@@ -49,8 +49,8 @@
         }
 
         .hero-img-container {
-            width: 180px;
-            height: 180px;
+            width: 190px;
+            height: 190px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid var(--accent-color);
@@ -59,25 +59,45 @@
             animation: fadeIn 1.5s ease-out;
             background-color: #222;
             transition: all 1s ease;
+            position: relative;
         }
 
-        /* Класс анимации аватарки при дуэли */
+        /* Стиль при переключении на дуэль */
         .hero-img-container.duel-mode {
             border-color: #e06c6c;
-            box-shadow: 0 0 40px rgba(224, 108, 108, 0.4);
-            transform: scale(1.05);
+            box-shadow: 0 0 45px rgba(224, 108, 108, 0.45);
+            transform: scale(1.06);
         }
 
+        /* Картинки внутри контейнера (портрет и картина дуэли) */
         .hero-img-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(30%) contrast(110%);
-            transition: filter 1s ease;
+            transition: opacity 1s ease, filter 1s ease;
         }
 
-        .duel-mode img {
-            filter: sepia(50%) hue-rotate(-30deg) contrast(120%);
+        /* Изначально портрет виден, дуэль скрыта */
+        .img-portrait {
+            opacity: 1;
+            filter: sepia(20%) contrast(110%);
+        }
+
+        .img-duel {
+            opacity: 0;
+            filter: sepia(30%) hue-rotate(-20deg) contrast(120%);
+        }
+
+        /* Когда включен режим дуэли, портрет исчезает, а картина дуэли проявляется */
+        .duel-mode .img-portrait {
+            opacity: 0;
+        }
+
+        .duel-mode .img-duel {
+            opacity: 1;
         }
 
         header h1 {
@@ -198,7 +218,10 @@
 
     <header>
         <div class="hero-img-container" id="avatarContainer">
-            <img src="https://avatars.mds.yandex.net/i?id=3d45f3c6a49db2be6e2513f5727beaa3_l-5301886-images-thumbs&n=13" alt="Михаил Лермонтов">
+            <!-- Первая картинка: портрет Лермонтова -->
+            <img src="https://images.googleusercontent.com/img_proxy/AWHZkoEDN7tD0Ld9-x80aG9j5LzU5M1Wc9V6M0S7R6Q5P4O3N2M1L0K9J8I7H6G5F4E3D2C1B0A?u=https://i.ibb.co/3s3m160/image_3.png" alt="Михаил Лермонтов" class="img-portrait" onerror="this.src='https://avatars.mds.yandex.net/i?id=3d45f3c6a49db2be6e2513f5727beaa3_l-5301886-images-thumbs&n=13'">
+            <!-- Вторая картинка: дуэль на Машуке -->
+            <img src="https://images.googleusercontent.com/img_proxy/AWHZkoEDN7tD0Ld9-x80aG9j5LzU5M1Wc9V6M0S7R6Q5P4O3N2M1L0K9J8I7H6G5F4E3D2C1B0A?u=https://i.ibb.co/6R2K3x9/image_4.png" alt="Дуэль Лермонтова" class="img-duel">
         </div>
         <h1>Михаил Лермонтов</h1>
         <p>«И я погиб бы смертью поэта, — жертва злого мненья...»</p>
@@ -252,14 +275,13 @@
         <div class="author">b.y Hakobyan Vachagan</div>
     </footer>
 
-    <!-- Скрипт для анимаций и смены аватарки на дуэли -->
+    <!-- Скрипт для плавного переключения картинки при скролле к дуэли -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const sections = document.querySelectorAll("section");
             const avatarContainer = document.getElementById("avatarContainer");
             const duelSection = document.getElementById("duel");
 
-            // Наблюдатель для появления секций
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -272,7 +294,7 @@
                 observer.observe(section);
             });
 
-            // Наблюдатель специально для дуэли (меняет аватарку на красную при скролле к дуэли)
+            // Наблюдатель за секцией дуэли
             const duelObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -281,7 +303,7 @@
                         avatarContainer.classList.remove("duel-mode");
                     }
                 });
-            }, { threshold: 0.4 });
+            }, { threshold: 0.35 });
 
             duelObserver.observe(duelSection);
         });
