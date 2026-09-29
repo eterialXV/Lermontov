@@ -69,7 +69,7 @@
             transform: scale(1.06);
         }
 
-        /* Картинки внутри контейнера (портрет и картина дуэли) */
+        /* Картинки внутри контейнера */
         .hero-img-container img {
             position: absolute;
             top: 0;
@@ -80,7 +80,6 @@
             transition: opacity 1s ease, filter 1s ease;
         }
 
-        /* Изначально портрет виден, дуэль скрыта */
         .img-portrait {
             opacity: 1;
             filter: sepia(20%) contrast(110%);
@@ -91,7 +90,6 @@
             filter: sepia(30%) hue-rotate(-20deg) contrast(120%);
         }
 
-        /* Когда включен режим дуэли, портрет исчезает, а картина дуэли проявляется */
         .duel-mode .img-portrait {
             opacity: 0;
         }
@@ -218,10 +216,10 @@
 
     <header>
         <div class="hero-img-container" id="avatarContainer">
-            <!-- Первая картинка: портрет Лермонтова -->
-            <img src="https://images.googleusercontent.com/img_proxy/AWHZkoEDN7tD0Ld9-x80aG9j5LzU5M1Wc9V6M0S7R6Q5P4O3N2M1L0K9J8I7H6G5F4E3D2C1B0A?u=https://i.ibb.co/3s3m160/image_3.png" alt="Михаил Лермонтов" class="img-portrait" onerror="this.src='https://avatars.mds.yandex.net/i?id=3d45f3c6a49db2be6e2513f5727beaa3_l-5301886-images-thumbs&n=13'">
-            <!-- Вторая картинка: дуэль на Машуке -->
-            <img src="https://images.googleusercontent.com/img_proxy/AWHZkoEDN7tD0Ld9-x80aG9j5LzU5M1Wc9V6M0S7R6Q5P4O3N2M1L0K9J8I7H6G5F4E3D2C1B0A?u=https://i.ibb.co/6R2K3x9/image_4.png" alt="Дуэль Лермонтова" class="img-duel">
+            <!-- Портрет Лермонтова -->
+            <img src="IMG_0559.jpeg" alt="Михаил Лермонтов" class="img-portrait">
+            <!-- Картина дуэли -->
+            <img src="IMG_0558.jpeg" alt="Дуэль Лермонтова" class="img-duel">
         </div>
         <h1>Михаил Лермонтов</h1>
         <p>«И я погиб бы смертью поэта, — жертва злого мненья...»</p>
@@ -301,6 +299,7 @@
                         avatarContainer.classList.add("duel-mode");
                     } else {
                         avatarContainer.classList.remove("duel-mode");
+                    }
                     }
                 });
             }, { threshold: 0.35 });
