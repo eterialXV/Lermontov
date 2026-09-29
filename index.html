@@ -32,7 +32,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Hero Section */
         header {
             height: 100vh;
             display: flex;
@@ -47,14 +46,14 @@
         }
 
         header h1 {
-            font-size: clamp(3rem, 6vw, 6rem);
+            font-size: clamp(2.5rem, 5vw, 6rem);
             color: var(--accent-color);
             margin-bottom: 20px;
             letter-spacing: 2px;
         }
 
         header p {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-size: clamp(1rem, 2vw, 1.5rem);
             max-width: 700px;
             color: var(--text-muted);
             font-style: italic;
@@ -74,7 +73,6 @@
             60% {transform: translateY(-5px);}
         }
 
-        /* Container */
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -86,7 +84,7 @@
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--accent-color);
             margin-bottom: 30px;
             border-left: 4px solid var(--accent-color);
@@ -99,7 +97,6 @@
             color: #d1d1d6;
         }
 
-        /* Timeline / Cards */
         .card {
             background-color: var(--card-bg);
             border-radius: 8px;
@@ -109,7 +106,6 @@
             margin-top: 40px;
         }
 
-        /* Duel Special Styling */
         .duel-section {
             background: linear-gradient(135deg, #16161a 0%, #1f1414 100%);
             border-color: rgba(180, 50, 50, 0.3);
@@ -131,7 +127,6 @@
             color: #f0f0f5;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 40px;
@@ -139,11 +134,7 @@
             color: var(--text-muted);
             border-top: 1px solid #222;
         }
-
-        @media (max-width: 768px) {
-            .card { padding: 20px; }
-        }
-    </svg>
+    </style>
 </head>
 <body>
 
@@ -155,7 +146,6 @@
 
     <div class="container">
         
-        <!-- Детство -->
         <section id="childhood">
             <h2>Генезис бунта: Детство в Тарханах</h2>
             <p>Ранние годы Михаила Лермонтова прошли в имении бабушки Елизаветы Арсеньевой — в живописном селе Тарханы. Но за внешней идиллией дворянской усадьбы скрывалась драма: бесконечные споры властной бабушки и больного чахоткой отца надломили гармонию детства.</p>
@@ -166,14 +156,12 @@
             </blockquote>
         </section>
 
-        <!-- Становление -->
         <section id="rise">
             <h2>Поэт и Гвардия</h2>
             <p>Петербург встретил Лермонтова блеском светских балов, гвардейскими мундирами и лицемерием высшего света. Он быстро завоевал репутацию дерзкого циника, мастера едкой эпиграммы и опасного дуэлянта. Но за маской светского шалопая скрывался гений, тяжело переживающий гибель Пушкина.</p>
             <p>Написанное после трагедии стихотворение «Смерть Поэта» взорвало империю. Николаевская цензура увидела в нем «воззвание к революции». Первая ссылка на Кавказ стала для Лермонтова не наказанием, а спасительным глотком свободы: суровая природа гор навсегда пленила его сердце.</p>
         </section>
 
-        <!-- Дуэль -->
         <section id="duel" class="duel-section">
             <h2>Фатальный туман: Дуэль у подножия Машука</h2>
             <p>Пятигорск, лето 1841 года. Душный воздух курортного города, светские сплетни и старая обида. Столкновение с отставным майором Николаем Мартыновым — человеком недалеким, но оскорбленным бесконечными колкостями и едкими насмешками Лермонтова.</p>
