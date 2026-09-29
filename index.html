@@ -27,14 +27,13 @@
             font-family: 'Roboto', sans-serif;
             line-height: 1.8;
             overflow-x: hidden;
-            transition: background 1s ease;
         }
 
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
         }
 
-        /* Hero Section с фото */
+        /* Hero Section с портретом */
         header {
             min-height: 100vh;
             display: flex;
@@ -53,51 +52,18 @@
             height: 190px;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid #e06c6c;
-            box-shadow: 0 0 35px rgba(224, 108, 108, 0.3);
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 35px var(--accent-glow);
             margin-bottom: 30px;
             animation: fadeIn 1.5s ease-out;
             background-color: #222;
-            transition: all 1s ease;
-            position: relative;
         }
 
-        /* Стиль при переключении (теперь при скролле к дуэли станет портретом) */
-        .hero-img-container.portrait-mode {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 45px var(--accent-glow);
-            transform: scale(1.06);
-        }
-
-        /* Картинки внутри контейнера */
         .hero-img-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: opacity 1s ease, filter 1s ease;
-        }
-
-        /* По умолчанию в шапке теперь ДУЭЛЬ (IMG_0558.jpeg) */
-        .img-duel {
-            opacity: 1;
-            filter: sepia(30%) hue-rotate(-20deg) contrast(120%);
-        }
-
-        /* ПОРТРЕТ (IMG_0559.jpeg) по умолчанию скрыт */
-        .img-portrait {
-            opacity: 0;
             filter: sepia(20%) contrast(110%);
-        }
-
-        .portrait-mode .img-duel {
-            opacity: 0;
-        }
-
-        .portrait-mode .img-portrait {
-            opacity: 1;
         }
 
         header h1 {
@@ -172,6 +138,44 @@
             border-radius: 0 8px 8px 0;
         }
 
+        /* Блок для картинки дуэли внутри текста */
+        .duel-image-wrapper {
+            margin-top: 40px;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid rgba(224, 108, 108, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+
+        /* Класс, который заставит картинку «вырисовываться» (появиться) */
+        .duel-image-wrapper.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .duel-image-wrapper img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            display: block;
+            filter: sepia(30%) hue-rotate(-20deg) contrast(120%);
+        }
+
+        .image-caption {
+            text-align: center;
+            padding: 12px;
+            background: #111;
+            font-size: 0.95rem;
+            color: #e06c6c;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -209,11 +213,9 @@
 <body>
 
     <header>
-        <div class="hero-img-container" id="avatarContainer">
-            <!-- Дуэль (IMG_0558.jpeg) теперь главная в шапке -->
-            <img src="IMG_0558.jpeg" alt="Дуэль Лермонтова" class="img-duel">
-            <!-- Портрет (IMG_0559.jpeg) появится при скролле -->
-            <img src="IMG_0559.jpeg" alt="Михаил Лермонтов" class="img-portrait">
+        <div class="hero-img-container">
+            <!-- Стабильный портрет в шапке -->
+            <img src="IMG_0559.jpeg" alt="Михаил Лермонтов">
         </div>
         <h1>Михаил Лермонтов</h1>
         <p>«И я погиб бы смертью поэта, — жертва злого мненья...»</p>
@@ -246,7 +248,7 @@
 
         <!-- Дуэль -->
         <section id="duel">
-            <div class="card duel-section" id="duelCard">
+            <div class="card duel-section">
                 <h2>Фатальный туман: Дуэль у подножия Машука</h2>
                 <p>Пятигорск, лето 1841 года. Курортный город переполнен военными, столичной молодежью и светскими сплетнями. Между Лермонтовым и отставным майором Николаем Мартыновым вспыхивает давняя неприязнь. Мартынов, человек самолюбивый и амбициозный, не мог простить поэту постоянных едких шуток, карикатур и сарказма в свой адрес, особенно в присутствии дам.</p>
                 <p><strong>15 (27) июля 1841 года</strong> около пяти часов вечера у подножия горы Машук разыгралась страшная трагедия. Погода была отвратительной: налетел ураганный ветер, хлынул ливень, местность заволокло непроглядным туманом. Секунданты пытались отменить поединок, но Лермонтов категорически отказался от примирения.</p>
@@ -257,6 +259,12 @@
                 </blockquote>
                 
                 <p>Похороны Лермонтова в Пятигорске были скромными: под проливным дождем гроб несли на плечах лишь несколько преданных друзей и офицеров. Император Николай I, узнав о гибели поэта, холодно обронил фразу, поразившую современников: <em>«То, что нужно для собаки — собачья смерть»</em>. Но время расставило всё по местам: империя забыла многих генералов той эпохи, а мальчик из Тархан навсегда остался совестью и болью русской литературы.</p>
+
+                <!-- Картина дуэли, которая плавно вырисовывается в конце текста дуэли -->
+                <div class="duel-image-wrapper" id="duelImage">
+                    <img src="IMG_0558.jpeg" alt="Дуэль Лермонтова у подножия Машука">
+                    <div class="image-caption">Дуэль М. Ю. Лермонтова с Н. С. Мартыновым у горы Машук, 15 июля 1841 года</div>
+                </div>
             </div>
         </section>
 
@@ -267,23 +275,20 @@
         <div class="author">b.y Hakobyan Vachagan</div>
     </footer>
 
-    <!-- Скрипт для плавного превращения дуэли в портрет при скролле к секции дуэли -->
+    <!-- Скрипт для плавного проявления картинки дуэли при прокрутке до конца блока -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const avatarContainer = document.getElementById("avatarContainer");
-            const duelSection = document.getElementById("duel");
+            const duelImage = document.getElementById("duelImage");
 
-            const duelObserver = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        avatarContainer.classList.add("portrait-mode");
-                    } else {
-                        avatarContainer.classList.remove("portrait-mode");
+                        duelImage.classList.add("revealed");
                     }
                 });
-            }, { threshold: 0.35 });
+            }, { threshold: 0.4 }); // Сработает, когда картинка или её часть появится на 40% на экране
 
-            duelObserver.observe(duelSection);
+            observer.observe(duelImage);
         });
     </script>
 
